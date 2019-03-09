@@ -15,9 +15,10 @@ class Comment
      * @ORM\Column(type="integer")
      */
     private $id;
-
+    //, inversedBy="comments"
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $author;
 
@@ -42,12 +43,12 @@ class Comment
         return $this->id;
     }
 
-    public function getAuthor(): ?string
+    public function getAuthor(): ?User
     {
         return $this->author;
     }
 
-    public function setAuthor(string $author): self
+    public function setAuthor(?User $author): self
     {
         $this->author = $author;
 
