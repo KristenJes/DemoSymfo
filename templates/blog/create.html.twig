@@ -12,6 +12,7 @@
 {{ form_row(formArticle.content, {'attr':{'placeholder':"Conteu de l'article"}}) }}
 {{ form_row(formArticle.image, {'attr':{'placeholder':"Image url de l'article"}}) }}
 
+<button class="btn btn-danger">{{ 'Cancel' | trans }}</button>
 <button type="submit" class="btn btn-success">
 {% if editMode %}
     Enregistrer les modifications

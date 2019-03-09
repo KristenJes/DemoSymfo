@@ -50,6 +50,11 @@ class User implements UserInterface
      */
     private $roles = [];
 
+    /**
+     * @ORM\Column(type="string", length=2)
+     */
+    private $locale;
+
     public function getId(): ? int
     {
         return $this->id;
@@ -83,6 +88,11 @@ class User implements UserInterface
         return array_unique($roles);
     }
 
+    public function getLocale(): ? string
+    {
+        return $this->locale;
+    }
+
     public function setUsername(string $username): self
     {
         $this->username = $username;
@@ -98,6 +108,13 @@ class User implements UserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function setLocale(string $locale): self
+    {
+        $this->locale = $locale;
 
         return $this;
     }
