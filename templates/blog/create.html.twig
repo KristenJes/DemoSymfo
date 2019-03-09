@@ -8,6 +8,7 @@
 {{ form_start(formArticle,  {'attr': {'id': 'add_article'}}) }}
 
 {{ form_row(formArticle.title, {'attr':{'placeholder':"Titre de l'article"}}) }}
+{{ form_row(formArticle.category) }}
 {{ form_row(formArticle.content, {'attr':{'placeholder':"Conteu de l'article"}}) }}
 {{ form_row(formArticle.image, {'attr':{'placeholder':"Image url de l'article"}}) }}
 
