@@ -2,51 +2,50 @@
 {% form_theme commentForm 'bootstrap_4_layout.html.twig' %}
 
 {% block body %}
-<article>
-    <h2>
-        {{ article.title }}</h2>
-    <div class="metadata">Écrit le
-        {{ article.createdAt | date('d/m/Y') }}
-        à
-        {{ article.createdAt | date('H:i') }}
-        dans la catégorie
-        {{ article.category.title }}</div>
-    <div class="content">
-        <img src="{{ article.image }}" alt="">
-        {{ article.content | raw }}
-    </div>
-</article>
-
-<section id="comments" style="margin-top: 150px;">
-    <h1>Commentaires <small>({{ article.comments | length }})</small></h1>
-
-    <div class="add-comment mb-4">
-        {% if app.user %}
-            {{ form_start(commentForm) }}
-
-            {{ form_row(commentForm.content, {'attr':{'placeholder': "Votre Commentaire"}}) }}
-            <button type="submit" class="btn btn-success">Commenter !</button>
-
-            {{ form_end(commentForm) }}
-        {% else %}
-            <h6>Vous devez être connecté pour pouvoir ajouter un commentaire</h6>
-            <a href="{{ path('security_login') }}" class="btn btn-primary">Connexion</a>
-        {% endif %}
-    </div>
-
-    {% for comment in article.comments %}
-    <div class="comment mb-2">
-        <div class="row">
-            <div class="col-2">
-                {{comment.author.username}}
-                <br>
-                <small>Le {{ comment.createdAt | date('d/m/Y à H:i') }}</small>
+    <article>
+        <h2>
+            {{ article.title }}</h2>
+        <div class="metadata">Écrit le
+            {{ article.createdAt | date('d/m/Y') }}
+            à
+            {{ article.createdAt | date('H:i') }}
+            dans la catégorie
+            {{ article.category.title }}</div>
+        <div class="content">
+            <img src="{{ article.image }}" alt="">
+                {{ article.content | raw }}
             </div>
-            <div class="col">
-                {{comment.content | raw}}
+        </article>
+        <section id="comments" style="margin-top: 150px;">
+            <h1>Commentaires
+                <small>({{ article.comments | length }})</small>
+            </h1>
+            <div class="add-comment mb-4">
+                {% if app.user %}
+                    {{ form_start(commentForm) }}
+                    {{ form_row(commentForm.content, {'attr':{'placeholder': "Votre Commentaire"}}) }}
+                    <button class="btn btn-success" type="submit">Commenter !</button>
+                    {{ form_end(commentForm) }}
+                    {% else %}
+                    <h6>Vous devez être connecté pour pouvoir ajouter un commentaire</h6>
+                    <a href="{{ path('security_login') }}" class="btn btn-primary">Connexion</a>
+                {% endif %}
             </div>
-        </div>
-    </div>
-    {% endfor %}
-</section>
-{% endblock %}
+            {% for comment in article.comments %}
+                <div class="comment mb-2">
+                    <div class="row">
+                        <div class="col-2">
+                            {{comment.author.username}}
+                            <br>
+                                <small>Le
+                                    {{ comment.createdAt | date('d/m/Y à H:i') }}</small>
+                            </div>
+                            <div class="col">
+                                {{comment.content | raw}}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </section>
+        {% endblock %}
+    

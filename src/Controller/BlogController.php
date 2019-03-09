@@ -41,6 +41,8 @@ class BlogController extends AbstractController
      * @Route("/blog/{id}/edit", name="blog_edit")
      */
     public function form(Article $article = null, Request $request, ObjectManager $manager){
+        $this->denyAccessUnlessGranted('ROLE_CREATOR', null, 'Unable to access this page!');
+        
         if(!$article){
             $article = new Article();
         }
@@ -91,4 +93,5 @@ class BlogController extends AbstractController
             'commentForm' => $form->createView()
         ]);
     }
+
 }

@@ -6,10 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 use App\Entity\User;
 use App\Form\RegistrationType;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class SecurityController extends AbstractController
 {
@@ -43,17 +43,23 @@ class SecurityController extends AbstractController
      */
     public function login()
     {
-        // if(!$user){
-        //     $user = new User();
-        // }
-
-        return $this->render('security/login.html.twig', [
-            // 'user' => $user
-        ]);
+        return $this->render('security/login.html.twig');
     }
 
     /**
      * @Route("/deconnexion", name="security_logout")
      */
     public function logout(){}
+
+
+    /**
+     * @Route("/admin", name="admin")
+     */
+    public function admin()
+    {
+        $hasAccess = $this->isGranted('ROLE_ADMIN');
+        return $this->render('blog/admin.html.twig',[
+            'hasAccess' => $hasAccess,
+        ]);
+    }
 }

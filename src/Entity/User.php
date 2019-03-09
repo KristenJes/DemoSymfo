@@ -45,12 +45,17 @@ class User implements UserInterface
      */
     public $confirm_password;
 
-    public function getId(): ?int
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
+
+    public function getId(): ? int
     {
         return $this->id;
     }
 
-    public function getEmail(): ?string
+    public function getEmail(): ? string
     {
         return $this->email;
     }
@@ -62,9 +67,20 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getUsername(): ?string
+    public function getUsername(): ? string
     {
         return $this->username;
+    }
+
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        if(empty($roles)){
+            $roles[] = 'ROLE_USER';
+        }
+
+        return array_unique($roles);
     }
 
     public function setUsername(string $username): self
@@ -74,7 +90,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getPassword(): ?string
+    public function getPassword(): ? string
     {
         return $this->password;
     }
@@ -87,17 +103,8 @@ class User implements UserInterface
     }
 
     public function eraseCredentials()
-    {
-        
-    }
+    { }
 
     public function getSalt()
-    {
-        
-    }
-
-    public function getRoles()
-    {
-        return array('ROLE_USER');
-    }
+    { }
 }

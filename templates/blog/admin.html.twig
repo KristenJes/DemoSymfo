@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h1>Page Admin</h1>
+
+<p>
+{% if hasAccess %}
+    Tu es Admin
+{% else %}
+    Tu es Normal
+{% endif %}
+</p>
+
+{% endblock %}
